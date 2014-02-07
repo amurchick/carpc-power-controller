@@ -1,0 +1,804 @@
+
+tiny45_carpc_pwr_controller.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000440  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000000c  00800060  00000440  000004d4  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          0000000e  0080006c  0080006c  000004e0  2**0
+                  ALLOC
+  3 .stab         000006cc  00000000  00000000  000004e0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      00000097  00000000  00000000  00000bac  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .comment      0000002f  00000000  00000000  00000c43  2**0
+                  CONTENTS, READONLY
+  6 .debug_aranges 00000070  00000000  00000000  00000c72  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_info   000003af  00000000  00000000  00000ce2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_abbrev 00000198  00000000  00000000  00001091  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   0000022f  00000000  00000000  00001229  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_frame  000000fc  00000000  00000000  00001458  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_str    000001ff  00000000  00000000  00001554  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_loc    00000159  00000000  00000000  00001753  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_ranges 00000060  00000000  00000000  000018ac  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0e c0       	rjmp	.+28     	; 0x1e <__ctors_end>
+   2:	28 c0       	rjmp	.+80     	; 0x54 <__bad_interrupt>
+   4:	27 c0       	rjmp	.+78     	; 0x54 <__bad_interrupt>
+   6:	26 c0       	rjmp	.+76     	; 0x54 <__bad_interrupt>
+   8:	4b c0       	rjmp	.+150    	; 0xa0 <__vector_4>
+   a:	24 c0       	rjmp	.+72     	; 0x54 <__bad_interrupt>
+   c:	23 c0       	rjmp	.+70     	; 0x54 <__bad_interrupt>
+   e:	22 c0       	rjmp	.+68     	; 0x54 <__bad_interrupt>
+  10:	21 c0       	rjmp	.+66     	; 0x54 <__bad_interrupt>
+  12:	20 c0       	rjmp	.+64     	; 0x54 <__bad_interrupt>
+  14:	1f c0       	rjmp	.+62     	; 0x54 <__bad_interrupt>
+  16:	1e c0       	rjmp	.+60     	; 0x54 <__bad_interrupt>
+  18:	1d c0       	rjmp	.+58     	; 0x54 <__bad_interrupt>
+  1a:	1c c0       	rjmp	.+56     	; 0x54 <__bad_interrupt>
+  1c:	1b c0       	rjmp	.+54     	; 0x54 <__bad_interrupt>
+
+0000001e <__ctors_end>:
+  1e:	11 24       	eor	r1, r1
+  20:	1f be       	out	0x3f, r1	; 63
+  22:	cf e5       	ldi	r28, 0x5F	; 95
+  24:	d1 e0       	ldi	r29, 0x01	; 1
+  26:	de bf       	out	0x3e, r29	; 62
+  28:	cd bf       	out	0x3d, r28	; 61
+
+0000002a <__do_copy_data>:
+  2a:	10 e0       	ldi	r17, 0x00	; 0
+  2c:	a0 e6       	ldi	r26, 0x60	; 96
+  2e:	b0 e0       	ldi	r27, 0x00	; 0
+  30:	e0 e4       	ldi	r30, 0x40	; 64
+  32:	f4 e0       	ldi	r31, 0x04	; 4
+  34:	02 c0       	rjmp	.+4      	; 0x3a <__do_copy_data+0x10>
+  36:	05 90       	lpm	r0, Z+
+  38:	0d 92       	st	X+, r0
+  3a:	ac 36       	cpi	r26, 0x6C	; 108
+  3c:	b1 07       	cpc	r27, r17
+  3e:	d9 f7       	brne	.-10     	; 0x36 <__do_copy_data+0xc>
+
+00000040 <__do_clear_bss>:
+  40:	20 e0       	ldi	r18, 0x00	; 0
+  42:	ac e6       	ldi	r26, 0x6C	; 108
+  44:	b0 e0       	ldi	r27, 0x00	; 0
+  46:	01 c0       	rjmp	.+2      	; 0x4a <.do_clear_bss_start>
+
+00000048 <.do_clear_bss_loop>:
+  48:	1d 92       	st	X+, r1
+
+0000004a <.do_clear_bss_start>:
+  4a:	aa 37       	cpi	r26, 0x7A	; 122
+  4c:	b2 07       	cpc	r27, r18
+  4e:	e1 f7       	brne	.-8      	; 0x48 <.do_clear_bss_loop>
+  50:	62 d1       	rcall	.+708    	; 0x316 <main>
+  52:	f4 c1       	rjmp	.+1000   	; 0x43c <_exit>
+
+00000054 <__bad_interrupt>:
+  54:	d5 cf       	rjmp	.-86     	; 0x0 <__vectors>
+
+00000056 <f_acc_on>:
+}
+
+// Включаем хаб/роутер и через несколько секунд входим в режим работы (если зажигание не отключили)
+void	f_acc_on()
+{
+	led_mode = LED_10;
+  56:	84 e0       	ldi	r24, 0x04	; 4
+  58:	80 93 60 00 	sts	0x0060, r24
+	// Включаем питание на хаб и роутер
+	PORTB |= _BV(HUB);
+  5c:	c1 9a       	sbi	0x18, 1	; 24
+
+	// Если зажигание включено уже более 2-х секунды
+	if (acc_cnt >= 2)
+  5e:	80 91 71 00 	lds	r24, 0x0071
+  62:	82 30       	cpi	r24, 0x02	; 2
+  64:	18 f0       	brcs	.+6      	; 0x6c <f_acc_on+0x16>
+		curr_state = S_WORK;
+  66:	82 e0       	ldi	r24, 0x02	; 2
+  68:	80 93 79 00 	sts	0x0079, r24
+
+	// Отключили зажигание?
+	if (acc_cnt == 0)
+  6c:	80 91 71 00 	lds	r24, 0x0071
+  70:	81 11       	cpse	r24, r1
+  72:	03 c0       	rjmp	.+6      	; 0x7a <f_acc_on+0x24>
+		curr_state = S_ACC_OFF;
+  74:	83 e0       	ldi	r24, 0x03	; 3
+  76:	80 93 79 00 	sts	0x0079, r24
+  7a:	08 95       	ret
+
+0000007c <f_bat_low>:
+	check_bat();
+}
+
+void	f_bat_low()
+{
+	led_mode = LED_IMP_3;
+  7c:	86 e0       	ldi	r24, 0x06	; 6
+  7e:	80 93 60 00 	sts	0x0060, r24
+
+	// Выключает OTG
+	PORTB &= ~_BV(OTG);
+  82:	c0 98       	cbi	0x18, 0	; 24
+
+	// Выключаем HUB через 10 секунд
+	if (vbat_low > 10)
+  84:	80 91 6e 00 	lds	r24, 0x006E
+  88:	8b 30       	cpi	r24, 0x0B	; 11
+  8a:	08 f0       	brcs	.+2      	; 0x8e <f_bat_low+0x12>
+		PORTB &= ~_BV(HUB);
+  8c:	c1 98       	cbi	0x18, 1	; 24
+
+	// Проверяем - зарядили ли батарею? Чтобы стабильна была в течении 30 секунд
+	if (vbat_ok > 30)
+  8e:	80 91 6d 00 	lds	r24, 0x006D
+  92:	8f 31       	cpi	r24, 0x1F	; 31
+  94:	20 f0       	brcs	.+8      	; 0x9e <f_bat_low+0x22>
+	{
+		curr_state = S_OFF;
+  96:	10 92 79 00 	sts	0x0079, r1
+		acc_cnt = 0; // Если АСС был уже включен - делаем вид, что только что включили
+  9a:	10 92 71 00 	sts	0x0071, r1
+  9e:	08 95       	ret
+
+000000a0 <__vector_4>:
+// Значение напряжения в бортовой сети
+volatile uint8_t	vbat	= 0;
+
+
+ISR (TIMER1_OVF_vect)
+{
+  a0:	1f 92       	push	r1
+  a2:	0f 92       	push	r0
+  a4:	0f b6       	in	r0, 0x3f	; 63
+  a6:	0f 92       	push	r0
+  a8:	11 24       	eor	r1, r1
+  aa:	2f 93       	push	r18
+  ac:	3f 93       	push	r19
+  ae:	5f 93       	push	r21
+  b0:	6f 93       	push	r22
+  b2:	7f 93       	push	r23
+  b4:	8f 93       	push	r24
+  b6:	9f 93       	push	r25
+  b8:	af 93       	push	r26
+  ba:	bf 93       	push	r27
+	if (sec_counter == 25)
+  bc:	80 91 78 00 	lds	r24, 0x0078
+  c0:	89 31       	cpi	r24, 0x19	; 25
+  c2:	09 f4       	brne	.+2      	; 0xc6 <__vector_4+0x26>
+		// start ADC the conversion
+		sbi(ADCSRA, ADSC);
+  c4:	36 9a       	sbi	0x06, 6	; 6
+
+	// Срабатывает раз в секунду
+	if (sec_counter > 122)
+  c6:	80 91 78 00 	lds	r24, 0x0078
+  ca:	8b 37       	cpi	r24, 0x7B	; 123
+  cc:	08 f4       	brcc	.+2      	; 0xd0 <__vector_4+0x30>
+  ce:	65 c0       	rjmp	.+202    	; 0x19a <__stack+0x3b>
+	{
+		sec_counter = 0;
+  d0:	10 92 78 00 	sts	0x0078, r1
+		uptime++;
+  d4:	80 91 74 00 	lds	r24, 0x0074
+  d8:	90 91 75 00 	lds	r25, 0x0075
+  dc:	a0 91 76 00 	lds	r26, 0x0076
+  e0:	b0 91 77 00 	lds	r27, 0x0077
+  e4:	01 96       	adiw	r24, 0x01	; 1
+  e6:	a1 1d       	adc	r26, r1
+  e8:	b1 1d       	adc	r27, r1
+  ea:	80 93 74 00 	sts	0x0074, r24
+  ee:	90 93 75 00 	sts	0x0075, r25
+  f2:	a0 93 76 00 	sts	0x0076, r26
+  f6:	b0 93 77 00 	sts	0x0077, r27
+
+		if (PINB & _BV(ACC))
+  fa:	b4 9b       	sbis	0x16, 4	; 22
+  fc:	0e c0       	rjmp	.+28     	; 0x11a <__vector_4+0x7a>
+		{
+			acc_off_cnt = 0;
+  fe:	10 92 70 00 	sts	0x0070, r1
+ 102:	10 92 6f 00 	sts	0x006F, r1
+			if (acc_cnt < 255)
+ 106:	80 91 71 00 	lds	r24, 0x0071
+ 10a:	8f 3f       	cpi	r24, 0xFF	; 255
+ 10c:	b9 f0       	breq	.+46     	; 0x13c <__vector_4+0x9c>
+				acc_cnt++;
+ 10e:	80 91 71 00 	lds	r24, 0x0071
+ 112:	8f 5f       	subi	r24, 0xFF	; 255
+ 114:	80 93 71 00 	sts	0x0071, r24
+ 118:	11 c0       	rjmp	.+34     	; 0x13c <__vector_4+0x9c>
+		}
+		else
+		{
+			acc_cnt = 0;
+ 11a:	10 92 71 00 	sts	0x0071, r1
+			if (acc_off_cnt < 65535)
+ 11e:	80 91 6f 00 	lds	r24, 0x006F
+ 122:	90 91 70 00 	lds	r25, 0x0070
+ 126:	01 96       	adiw	r24, 0x01	; 1
+ 128:	49 f0       	breq	.+18     	; 0x13c <__vector_4+0x9c>
+				acc_off_cnt++;
+ 12a:	80 91 6f 00 	lds	r24, 0x006F
+ 12e:	90 91 70 00 	lds	r25, 0x0070
+ 132:	01 96       	adiw	r24, 0x01	; 1
+ 134:	90 93 70 00 	sts	0x0070, r25
+ 138:	80 93 6f 00 	sts	0x006F, r24
+		}
+
+		// Прочитаем значение напряжения
+	uint8_t low, high;
+		low  = ADCL; high = ADCH;
+ 13c:	24 b1       	in	r18, 0x04	; 4
+ 13e:	35 b1       	in	r19, 0x05	; 5
+		// combine the two bytes
+	uint16_t out = (high << 8) | low;
+ 140:	93 2f       	mov	r25, r19
+ 142:	80 e0       	ldi	r24, 0x00	; 0
+		// map to real value
+		// resistor divider k=4
+		// we need return U*10
+		// formula Uret = out*5(Vref)*k(4)/1024 * 10
+		// after optimization = out * 25/128
+		out *= 25;
+ 144:	82 2b       	or	r24, r18
+ 146:	69 e1       	ldi	r22, 0x19	; 25
+ 148:	70 e0       	ldi	r23, 0x00	; 0
+ 14a:	38 d1       	rcall	.+624    	; 0x3bc <__mulhi3>
+		vbat = out >> 7; // div 128
+ 14c:	88 0f       	add	r24, r24
+ 14e:	89 2f       	mov	r24, r25
+ 150:	88 1f       	adc	r24, r24
+ 152:	99 0b       	sbc	r25, r25
+ 154:	91 95       	neg	r25
+ 156:	80 93 6c 00 	sts	0x006C, r24
+
+		// Если батарея разрядилась
+		if (vbat < BAT_LOW)
+ 15a:	80 91 6c 00 	lds	r24, 0x006C
+ 15e:	84 36       	cpi	r24, 0x64	; 100
+ 160:	50 f4       	brcc	.+20     	; 0x176 <__stack+0x17>
+		{
+			if (vbat_low < 255)
+ 162:	80 91 6e 00 	lds	r24, 0x006E
+ 166:	8f 3f       	cpi	r24, 0xFF	; 255
+ 168:	41 f0       	breq	.+16     	; 0x17a <__stack+0x1b>
+				vbat_low++;
+ 16a:	80 91 6e 00 	lds	r24, 0x006E
+ 16e:	8f 5f       	subi	r24, 0xFF	; 255
+ 170:	80 93 6e 00 	sts	0x006E, r24
+ 174:	02 c0       	rjmp	.+4      	; 0x17a <__stack+0x1b>
+		}
+		else
+			vbat_low = 0;
+ 176:	10 92 6e 00 	sts	0x006E, r1
+
+		// Считаем нормальной батарею - если от минимума +1Вольт
+		if (vbat > BAT_LOW + 10)
+ 17a:	80 91 6c 00 	lds	r24, 0x006C
+ 17e:	8f 36       	cpi	r24, 0x6F	; 111
+ 180:	50 f0       	brcs	.+20     	; 0x196 <__stack+0x37>
+		{
+			if (vbat_ok < 255)
+ 182:	80 91 6d 00 	lds	r24, 0x006D
+ 186:	8f 3f       	cpi	r24, 0xFF	; 255
+ 188:	41 f0       	breq	.+16     	; 0x19a <__stack+0x3b>
+				vbat_ok++;
+ 18a:	80 91 6d 00 	lds	r24, 0x006D
+ 18e:	8f 5f       	subi	r24, 0xFF	; 255
+ 190:	80 93 6d 00 	sts	0x006D, r24
+ 194:	02 c0       	rjmp	.+4      	; 0x19a <__stack+0x3b>
+		}
+		else
+			vbat_ok = 0;
+ 196:	10 92 6d 00 	sts	0x006D, r1
+
+	}
+
+	switch (led_mode)
+ 19a:	80 91 60 00 	lds	r24, 0x0060
+ 19e:	83 30       	cpi	r24, 0x03	; 3
+ 1a0:	c9 f0       	breq	.+50     	; 0x1d4 <__stack+0x75>
+ 1a2:	20 f4       	brcc	.+8      	; 0x1ac <__stack+0x4d>
+ 1a4:	81 30       	cpi	r24, 0x01	; 1
+ 1a6:	49 f0       	breq	.+18     	; 0x1ba <__stack+0x5b>
+ 1a8:	50 f4       	brcc	.+20     	; 0x1be <__stack+0x5f>
+ 1aa:	50 c0       	rjmp	.+160    	; 0x24c <__stack+0xed>
+ 1ac:	85 30       	cpi	r24, 0x05	; 5
+ 1ae:	59 f1       	breq	.+86     	; 0x206 <__stack+0xa7>
+ 1b0:	e0 f0       	brcs	.+56     	; 0x1ea <__stack+0x8b>
+ 1b2:	86 30       	cpi	r24, 0x06	; 6
+ 1b4:	09 f0       	breq	.+2      	; 0x1b8 <__stack+0x59>
+ 1b6:	4b c0       	rjmp	.+150    	; 0x24e <__stack+0xef>
+ 1b8:	30 c0       	rjmp	.+96     	; 0x21a <__stack+0xbb>
+	{
+		case	LED_OFF:	cbi(PORTB, LED); break;
+		case	LED_ON:		sbi(PORTB, LED); break;
+ 1ba:	c2 9a       	sbi	0x18, 2	; 24
+ 1bc:	48 c0       	rjmp	.+144    	; 0x24e <__stack+0xef>
+		case	LED_50:		if (sec_counter % 60 == 0) sbi(PORTB, LED);
+ 1be:	80 91 78 00 	lds	r24, 0x0078
+ 1c2:	6c e3       	ldi	r22, 0x3C	; 60
+ 1c4:	0d d1       	rcall	.+538    	; 0x3e0 <__udivmodqi4>
+ 1c6:	91 11       	cpse	r25, r1
+ 1c8:	01 c0       	rjmp	.+2      	; 0x1cc <__stack+0x6d>
+ 1ca:	c2 9a       	sbi	0x18, 2	; 24
+							if (sec_counter % 122 == 0) cbi(PORTB, LED);
+ 1cc:	80 91 78 00 	lds	r24, 0x0078
+ 1d0:	6a e7       	ldi	r22, 0x7A	; 122
+ 1d2:	15 c0       	rjmp	.+42     	; 0x1fe <__stack+0x9f>
+							break;
+		case	LED_25:		if (sec_counter % 30 == 0) sbi(PORTB, LED);
+ 1d4:	80 91 78 00 	lds	r24, 0x0078
+ 1d8:	6e e1       	ldi	r22, 0x1E	; 30
+ 1da:	02 d1       	rcall	.+516    	; 0x3e0 <__udivmodqi4>
+ 1dc:	91 11       	cpse	r25, r1
+ 1de:	01 c0       	rjmp	.+2      	; 0x1e2 <__stack+0x83>
+ 1e0:	c2 9a       	sbi	0x18, 2	; 24
+							if (sec_counter % 60 == 0) cbi(PORTB, LED);
+ 1e2:	80 91 78 00 	lds	r24, 0x0078
+ 1e6:	6c e3       	ldi	r22, 0x3C	; 60
+ 1e8:	0a c0       	rjmp	.+20     	; 0x1fe <__stack+0x9f>
+							break;
+		case	LED_10:		if (sec_counter % 10 == 0) sbi(PORTB, LED);
+ 1ea:	80 91 78 00 	lds	r24, 0x0078
+ 1ee:	6a e0       	ldi	r22, 0x0A	; 10
+ 1f0:	f7 d0       	rcall	.+494    	; 0x3e0 <__udivmodqi4>
+ 1f2:	91 11       	cpse	r25, r1
+ 1f4:	01 c0       	rjmp	.+2      	; 0x1f8 <__stack+0x99>
+ 1f6:	c2 9a       	sbi	0x18, 2	; 24
+							if (sec_counter % 20 == 0) cbi(PORTB, LED);
+ 1f8:	80 91 78 00 	lds	r24, 0x0078
+ 1fc:	64 e1       	ldi	r22, 0x14	; 20
+ 1fe:	f0 d0       	rcall	.+480    	; 0x3e0 <__udivmodqi4>
+ 200:	91 11       	cpse	r25, r1
+ 202:	25 c0       	rjmp	.+74     	; 0x24e <__stack+0xef>
+ 204:	23 c0       	rjmp	.+70     	; 0x24c <__stack+0xed>
+							break;
+		case	LED_IMP_1:	if (sec_counter == 0) sbi(PORTB, LED);
+ 206:	80 91 78 00 	lds	r24, 0x0078
+ 20a:	81 11       	cpse	r24, r1
+ 20c:	01 c0       	rjmp	.+2      	; 0x210 <__stack+0xb1>
+ 20e:	c2 9a       	sbi	0x18, 2	; 24
+							if (sec_counter == 1) cbi(PORTB, LED);
+ 210:	80 91 78 00 	lds	r24, 0x0078
+ 214:	81 30       	cpi	r24, 0x01	; 1
+ 216:	d9 f4       	brne	.+54     	; 0x24e <__stack+0xef>
+ 218:	19 c0       	rjmp	.+50     	; 0x24c <__stack+0xed>
+							break;
+		case	LED_IMP_3:	if (sec_counter == 0 || sec_counter == 30 || sec_counter == 60) sbi(PORTB, LED);
+ 21a:	80 91 78 00 	lds	r24, 0x0078
+ 21e:	88 23       	and	r24, r24
+ 220:	41 f0       	breq	.+16     	; 0x232 <__stack+0xd3>
+ 222:	80 91 78 00 	lds	r24, 0x0078
+ 226:	8e 31       	cpi	r24, 0x1E	; 30
+ 228:	21 f0       	breq	.+8      	; 0x232 <__stack+0xd3>
+ 22a:	80 91 78 00 	lds	r24, 0x0078
+ 22e:	8c 33       	cpi	r24, 0x3C	; 60
+ 230:	09 f4       	brne	.+2      	; 0x234 <__stack+0xd5>
+ 232:	c2 9a       	sbi	0x18, 2	; 24
+							if (sec_counter == 1 || sec_counter == 31 || sec_counter == 61) cbi(PORTB, LED);
+ 234:	80 91 78 00 	lds	r24, 0x0078
+ 238:	81 30       	cpi	r24, 0x01	; 1
+ 23a:	41 f0       	breq	.+16     	; 0x24c <__stack+0xed>
+ 23c:	80 91 78 00 	lds	r24, 0x0078
+ 240:	8f 31       	cpi	r24, 0x1F	; 31
+ 242:	21 f0       	breq	.+8      	; 0x24c <__stack+0xed>
+ 244:	80 91 78 00 	lds	r24, 0x0078
+ 248:	8d 33       	cpi	r24, 0x3D	; 61
+ 24a:	09 f4       	brne	.+2      	; 0x24e <__stack+0xef>
+ 24c:	c2 98       	cbi	0x18, 2	; 24
+							break;
+	}
+
+	sec_counter++;
+ 24e:	80 91 78 00 	lds	r24, 0x0078
+ 252:	8f 5f       	subi	r24, 0xFF	; 255
+ 254:	80 93 78 00 	sts	0x0078, r24
+
+	// Для функции delay
+	if (count_down > 0)
+ 258:	80 91 72 00 	lds	r24, 0x0072
+ 25c:	90 91 73 00 	lds	r25, 0x0073
+ 260:	89 2b       	or	r24, r25
+ 262:	49 f0       	breq	.+18     	; 0x276 <__stack+0x117>
+		count_down--;
+ 264:	80 91 72 00 	lds	r24, 0x0072
+ 268:	90 91 73 00 	lds	r25, 0x0073
+ 26c:	01 97       	sbiw	r24, 0x01	; 1
+ 26e:	90 93 73 00 	sts	0x0073, r25
+ 272:	80 93 72 00 	sts	0x0072, r24
+
+}
+ 276:	bf 91       	pop	r27
+ 278:	af 91       	pop	r26
+ 27a:	9f 91       	pop	r25
+ 27c:	8f 91       	pop	r24
+ 27e:	7f 91       	pop	r23
+ 280:	6f 91       	pop	r22
+ 282:	5f 91       	pop	r21
+ 284:	3f 91       	pop	r19
+ 286:	2f 91       	pop	r18
+ 288:	0f 90       	pop	r0
+ 28a:	0f be       	out	0x3f, r0	; 63
+ 28c:	0f 90       	pop	r0
+ 28e:	1f 90       	pop	r1
+ 290:	18 95       	reti
+
+00000292 <delay>:
+
+// Функция задержки, не менее 10 мс и не более 650 с
+void	delay(unsigned long ms)
+{
+	if (ms < 10)		ms = 10;
+ 292:	6a 30       	cpi	r22, 0x0A	; 10
+ 294:	71 05       	cpc	r23, r1
+ 296:	81 05       	cpc	r24, r1
+ 298:	91 05       	cpc	r25, r1
+ 29a:	40 f0       	brcs	.+16     	; 0x2ac <delay+0x1a>
+	if (ms > 655350)	ms = 655350;
+ 29c:	67 3f       	cpi	r22, 0xF7	; 247
+ 29e:	2f ef       	ldi	r18, 0xFF	; 255
+ 2a0:	72 07       	cpc	r23, r18
+ 2a2:	29 e0       	ldi	r18, 0x09	; 9
+ 2a4:	82 07       	cpc	r24, r18
+ 2a6:	91 05       	cpc	r25, r1
+ 2a8:	30 f4       	brcc	.+12     	; 0x2b6 <delay+0x24>
+ 2aa:	09 c0       	rjmp	.+18     	; 0x2be <delay+0x2c>
+}
+
+// Функция задержки, не менее 10 мс и не более 650 с
+void	delay(unsigned long ms)
+{
+	if (ms < 10)		ms = 10;
+ 2ac:	6a e0       	ldi	r22, 0x0A	; 10
+ 2ae:	70 e0       	ldi	r23, 0x00	; 0
+ 2b0:	80 e0       	ldi	r24, 0x00	; 0
+ 2b2:	90 e0       	ldi	r25, 0x00	; 0
+ 2b4:	04 c0       	rjmp	.+8      	; 0x2be <delay+0x2c>
+	if (ms > 655350)	ms = 655350;
+ 2b6:	66 ef       	ldi	r22, 0xF6	; 246
+ 2b8:	7f ef       	ldi	r23, 0xFF	; 255
+ 2ba:	89 e0       	ldi	r24, 0x09	; 9
+ 2bc:	90 e0       	ldi	r25, 0x00	; 0
+
+	cli();
+ 2be:	f8 94       	cli
+	count_down = ms / 10;
+ 2c0:	2a e0       	ldi	r18, 0x0A	; 10
+ 2c2:	30 e0       	ldi	r19, 0x00	; 0
+ 2c4:	40 e0       	ldi	r20, 0x00	; 0
+ 2c6:	50 e0       	ldi	r21, 0x00	; 0
+ 2c8:	97 d0       	rcall	.+302    	; 0x3f8 <__udivmodsi4>
+ 2ca:	30 93 73 00 	sts	0x0073, r19
+ 2ce:	20 93 72 00 	sts	0x0072, r18
+	sei();
+ 2d2:	78 94       	sei
+	while (count_down)
+ 2d4:	07 c0       	rjmp	.+14     	; 0x2e4 <delay+0x52>
+		sleep_mode();
+ 2d6:	85 b7       	in	r24, 0x35	; 53
+ 2d8:	80 62       	ori	r24, 0x20	; 32
+ 2da:	85 bf       	out	0x35, r24	; 53
+ 2dc:	88 95       	sleep
+ 2de:	85 b7       	in	r24, 0x35	; 53
+ 2e0:	8f 7d       	andi	r24, 0xDF	; 223
+ 2e2:	85 bf       	out	0x35, r24	; 53
+	if (ms > 655350)	ms = 655350;
+
+	cli();
+	count_down = ms / 10;
+	sei();
+	while (count_down)
+ 2e4:	80 91 72 00 	lds	r24, 0x0072
+ 2e8:	90 91 73 00 	lds	r25, 0x0073
+ 2ec:	89 2b       	or	r24, r25
+ 2ee:	99 f7       	brne	.-26     	; 0x2d6 <delay+0x44>
+		sleep_mode();
+}
+ 2f0:	08 95       	ret
+
+000002f2 <setup>:
+
+void	setup()
+{
+	// Set pins as output
+	DDRB = _BV(OTG) | _BV(LED) | _BV(HUB);
+ 2f2:	87 e0       	ldi	r24, 0x07	; 7
+ 2f4:	87 bb       	out	0x17, r24	; 23
+
+	// Set Pull-Up on ACC pin
+	PORTB = _BV(ACC);
+ 2f6:	80 e1       	ldi	r24, 0x10	; 16
+ 2f8:	88 bb       	out	0x18, r24	; 24
+
+	// Для прерываний отсчета времени и других действий используем TIMER1
+	// Устанавливаем делитель на 32 = 1MHz /32 /256 =~ 122 прерывания в сек
+	TCCR1 = _BV(CS12) | _BV(CS11);
+ 2fa:	86 e0       	ldi	r24, 0x06	; 6
+ 2fc:	80 bf       	out	0x30, r24	; 48
+	// TIMER1 - разрешаем прерывание по переполнению
+	TIMSK |= _BV(TOIE1);
+ 2fe:	89 b7       	in	r24, 0x39	; 57
+ 300:	84 60       	ori	r24, 0x04	; 4
+ 302:	89 bf       	out	0x39, r24	; 57
+
+	set_sleep_mode(SLEEP_MODE_IDLE);
+ 304:	85 b7       	in	r24, 0x35	; 53
+ 306:	87 7e       	andi	r24, 0xE7	; 231
+ 308:	85 bf       	out	0x35, r24	; 53
+
+	mode_2_rele_and_nvram();
+*/
+
+	// set a2d prescale factor to 8 (1 MHz / 8 = 125 KHz, inside the desired by manual 50-200 KHz range)
+	ADCSRA = _BV(ADPS1) | _BV(ADPS0);
+ 30a:	83 e0       	ldi	r24, 0x03	; 3
+ 30c:	86 b9       	out	0x06, r24	; 6
+
+	// Выбираем питание тиньки (5,01В) как AREF и 3-й канал (нога B3)
+	ADMUX = _BV(MUX1) | _BV(MUX0);
+ 30e:	87 b9       	out	0x07, r24	; 7
+
+	// Разрешаем работу ADC
+	sbi(ADCSRA, ADEN);
+ 310:	37 9a       	sbi	0x06, 7	; 6
+
+	sei();
+ 312:	78 94       	sei
+ 314:	08 95       	ret
+
+00000316 <main>:
+	return out >> 7; // div 128
+}
+
+int	main()
+{
+	setup();
+ 316:	ed df       	rcall	.-38     	; 0x2f2 <setup>
+	// Подождем первого измерения напряжения
+	delay(1500);
+ 318:	6c ed       	ldi	r22, 0xDC	; 220
+ 31a:	75 e0       	ldi	r23, 0x05	; 5
+ 31c:	80 e0       	ldi	r24, 0x00	; 0
+ 31e:	90 e0       	ldi	r25, 0x00	; 0
+ 320:	b8 df       	rcall	.-144    	; 0x292 <delay>
+
+	//eeprom_write_byte(0, vbat);
+	while (1)
+	{
+		state_funcs[curr_state]();
+ 322:	e0 91 79 00 	lds	r30, 0x0079
+ 326:	f0 e0       	ldi	r31, 0x00	; 0
+ 328:	ee 0f       	add	r30, r30
+ 32a:	ff 1f       	adc	r31, r31
+ 32c:	ef 59       	subi	r30, 0x9F	; 159
+ 32e:	ff 4f       	sbci	r31, 0xFF	; 255
+ 330:	01 90       	ld	r0, Z+
+ 332:	f0 81       	ld	r31, Z
+ 334:	e0 2d       	mov	r30, r0
+ 336:	09 95       	icall
+		delay(250);
+ 338:	6a ef       	ldi	r22, 0xFA	; 250
+ 33a:	70 e0       	ldi	r23, 0x00	; 0
+ 33c:	80 e0       	ldi	r24, 0x00	; 0
+ 33e:	90 e0       	ldi	r25, 0x00	; 0
+ 340:	ef cf       	rjmp	.-34     	; 0x320 <main+0xa>
+
+00000342 <check_bat>:
+}
+
+void	check_bat()
+{
+	// Если более 1 минуты разряжены
+	if (vbat_low > 1*60)
+ 342:	80 91 6e 00 	lds	r24, 0x006E
+ 346:	8d 33       	cpi	r24, 0x3D	; 61
+ 348:	18 f0       	brcs	.+6      	; 0x350 <check_bat+0xe>
+		curr_state = S_BAT_LOW;
+ 34a:	84 e0       	ldi	r24, 0x04	; 4
+ 34c:	80 93 79 00 	sts	0x0079, r24
+ 350:	08 95       	ret
+
+00000352 <f_acc_off>:
+}
+
+// Ждем таймаута и вырубаемся
+void	f_acc_off()
+{
+	led_mode = LED_25;
+ 352:	83 e0       	ldi	r24, 0x03	; 3
+ 354:	80 93 60 00 	sts	0x0060, r24
+
+	// Зажигание появилось?
+	if (acc_cnt > 0)
+ 358:	80 91 71 00 	lds	r24, 0x0071
+ 35c:	88 23       	and	r24, r24
+ 35e:	19 f0       	breq	.+6      	; 0x366 <f_acc_off+0x14>
+		curr_state = S_ACC_ON;
+ 360:	81 e0       	ldi	r24, 0x01	; 1
+ 362:	80 93 79 00 	sts	0x0079, r24
+
+	// Прошло 2 секунд после пропажи зажигания?
+	if (acc_off_cnt > 2)
+ 366:	80 91 6f 00 	lds	r24, 0x006F
+ 36a:	90 91 70 00 	lds	r25, 0x0070
+ 36e:	03 97       	sbiw	r24, 0x03	; 3
+ 370:	08 f0       	brcs	.+2      	; 0x374 <f_acc_off+0x22>
+		// Выключает OTG
+		PORTB &= ~_BV(OTG);
+ 372:	c0 98       	cbi	0x18, 0	; 24
+
+	// Прошло 20 минут после пропажи зажигания?
+	if (acc_off_cnt > 20*60)
+ 374:	80 91 6f 00 	lds	r24, 0x006F
+ 378:	90 91 70 00 	lds	r25, 0x0070
+ 37c:	81 3b       	cpi	r24, 0xB1	; 177
+ 37e:	94 40       	sbci	r25, 0x04	; 4
+ 380:	10 f0       	brcs	.+4      	; 0x386 <f_acc_off+0x34>
+		curr_state = S_OFF;
+ 382:	10 92 79 00 	sts	0x0079, r1
+
+	// Батарея не разрядилась?
+	check_bat();
+ 386:	dd cf       	rjmp	.-70     	; 0x342 <check_bat>
+
+00000388 <f_work>:
+}
+
+// Работаем
+void	f_work()
+{
+	led_mode = LED_50;
+ 388:	82 e0       	ldi	r24, 0x02	; 2
+ 38a:	80 93 60 00 	sts	0x0060, r24
+	// Включаем питание на хаб и роутер
+	PORTB |= _BV(OTG);
+ 38e:	c0 9a       	sbi	0x18, 0	; 24
+
+	// Отключили зажигание?
+	if (acc_cnt == 0)
+ 390:	80 91 71 00 	lds	r24, 0x0071
+ 394:	81 11       	cpse	r24, r1
+ 396:	03 c0       	rjmp	.+6      	; 0x39e <f_work+0x16>
+		curr_state = S_ACC_OFF;
+ 398:	83 e0       	ldi	r24, 0x03	; 3
+ 39a:	80 93 79 00 	sts	0x0079, r24
+
+	// Батарея не разрядилась?
+	check_bat();
+ 39e:	d1 cf       	rjmp	.-94     	; 0x342 <check_bat>
+
+000003a0 <f_off>:
+}
+
+// Всё выключаем и ждем появления ACC
+void	f_off()
+{
+	led_mode = LED_IMP_1;
+ 3a0:	85 e0       	ldi	r24, 0x05	; 5
+ 3a2:	80 93 60 00 	sts	0x0060, r24
+	// Выключаем всё
+	PORTB &= ~(_BV(HUB) | _BV(OTG));
+ 3a6:	88 b3       	in	r24, 0x18	; 24
+ 3a8:	8c 7f       	andi	r24, 0xFC	; 252
+ 3aa:	88 bb       	out	0x18, r24	; 24
+
+	// Если зажигание включено уже более 1-х секунды
+	if (acc_cnt >= 1)
+ 3ac:	80 91 71 00 	lds	r24, 0x0071
+ 3b0:	88 23       	and	r24, r24
+ 3b2:	19 f0       	breq	.+6      	; 0x3ba <f_off+0x1a>
+		curr_state = S_ACC_ON;
+ 3b4:	81 e0       	ldi	r24, 0x01	; 1
+ 3b6:	80 93 79 00 	sts	0x0079, r24
+
+	// Батарея не разрядилась?
+	check_bat();
+ 3ba:	c3 cf       	rjmp	.-122    	; 0x342 <check_bat>
+
+000003bc <__mulhi3>:
+ 3bc:	55 27       	eor	r21, r21
+ 3be:	00 24       	eor	r0, r0
+
+000003c0 <__mulhi3_loop>:
+ 3c0:	80 ff       	sbrs	r24, 0
+ 3c2:	02 c0       	rjmp	.+4      	; 0x3c8 <__mulhi3_skip1>
+ 3c4:	06 0e       	add	r0, r22
+ 3c6:	57 1f       	adc	r21, r23
+
+000003c8 <__mulhi3_skip1>:
+ 3c8:	66 0f       	add	r22, r22
+ 3ca:	77 1f       	adc	r23, r23
+ 3cc:	61 15       	cp	r22, r1
+ 3ce:	71 05       	cpc	r23, r1
+ 3d0:	21 f0       	breq	.+8      	; 0x3da <__mulhi3_exit>
+ 3d2:	96 95       	lsr	r25
+ 3d4:	87 95       	ror	r24
+ 3d6:	00 97       	sbiw	r24, 0x00	; 0
+ 3d8:	99 f7       	brne	.-26     	; 0x3c0 <__mulhi3_loop>
+
+000003da <__mulhi3_exit>:
+ 3da:	95 2f       	mov	r25, r21
+ 3dc:	80 2d       	mov	r24, r0
+ 3de:	08 95       	ret
+
+000003e0 <__udivmodqi4>:
+ 3e0:	99 1b       	sub	r25, r25
+ 3e2:	79 e0       	ldi	r23, 0x09	; 9
+ 3e4:	04 c0       	rjmp	.+8      	; 0x3ee <__udivmodqi4_ep>
+
+000003e6 <__udivmodqi4_loop>:
+ 3e6:	99 1f       	adc	r25, r25
+ 3e8:	96 17       	cp	r25, r22
+ 3ea:	08 f0       	brcs	.+2      	; 0x3ee <__udivmodqi4_ep>
+ 3ec:	96 1b       	sub	r25, r22
+
+000003ee <__udivmodqi4_ep>:
+ 3ee:	88 1f       	adc	r24, r24
+ 3f0:	7a 95       	dec	r23
+ 3f2:	c9 f7       	brne	.-14     	; 0x3e6 <__udivmodqi4_loop>
+ 3f4:	80 95       	com	r24
+ 3f6:	08 95       	ret
+
+000003f8 <__udivmodsi4>:
+ 3f8:	a1 e2       	ldi	r26, 0x21	; 33
+ 3fa:	1a 2e       	mov	r1, r26
+ 3fc:	aa 1b       	sub	r26, r26
+ 3fe:	bb 1b       	sub	r27, r27
+ 400:	fd 01       	movw	r30, r26
+ 402:	0d c0       	rjmp	.+26     	; 0x41e <__udivmodsi4_ep>
+
+00000404 <__udivmodsi4_loop>:
+ 404:	aa 1f       	adc	r26, r26
+ 406:	bb 1f       	adc	r27, r27
+ 408:	ee 1f       	adc	r30, r30
+ 40a:	ff 1f       	adc	r31, r31
+ 40c:	a2 17       	cp	r26, r18
+ 40e:	b3 07       	cpc	r27, r19
+ 410:	e4 07       	cpc	r30, r20
+ 412:	f5 07       	cpc	r31, r21
+ 414:	20 f0       	brcs	.+8      	; 0x41e <__udivmodsi4_ep>
+ 416:	a2 1b       	sub	r26, r18
+ 418:	b3 0b       	sbc	r27, r19
+ 41a:	e4 0b       	sbc	r30, r20
+ 41c:	f5 0b       	sbc	r31, r21
+
+0000041e <__udivmodsi4_ep>:
+ 41e:	66 1f       	adc	r22, r22
+ 420:	77 1f       	adc	r23, r23
+ 422:	88 1f       	adc	r24, r24
+ 424:	99 1f       	adc	r25, r25
+ 426:	1a 94       	dec	r1
+ 428:	69 f7       	brne	.-38     	; 0x404 <__udivmodsi4_loop>
+ 42a:	60 95       	com	r22
+ 42c:	70 95       	com	r23
+ 42e:	80 95       	com	r24
+ 430:	90 95       	com	r25
+ 432:	9b 01       	movw	r18, r22
+ 434:	ac 01       	movw	r20, r24
+ 436:	bd 01       	movw	r22, r26
+ 438:	cf 01       	movw	r24, r30
+ 43a:	08 95       	ret
+
+0000043c <_exit>:
+ 43c:	f8 94       	cli
+
+0000043e <__stop_program>:
+ 43e:	ff cf       	rjmp	.-2      	; 0x43e <__stop_program>

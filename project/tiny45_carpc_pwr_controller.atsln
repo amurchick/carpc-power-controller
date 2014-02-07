@@ -1,0 +1,17 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "tiny45_carpc_pwr_controller", "tiny45_carpc_pwr_controller.cproj", "{FF7EAE07-7401-4521-89BD-DEAC922589F0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		default|AVR = default|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF7EAE07-7401-4521-89BD-DEAC922589F0}.default|AVR.ActiveCfg = default|AVR
+		{FF7EAE07-7401-4521-89BD-DEAC922589F0}.default|AVR.Build.0 = default|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
